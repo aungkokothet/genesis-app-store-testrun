@@ -1,80 +1,68 @@
 "use client"
 
-import React from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { registrationSchema } from "../data/registrationSchema"
+import type { RegistrationInput } from "../data/registrationSchema"
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "~/components/ui/form"
+import { Input } from "~/components/ui/input"
+import { Button } from "~/components/ui/button"
 
 export function RegistrationForm() {
+  const form = useForm<RegistrationInput>({
+    resolver: zodResolver(registrationSchema),
+    defaultValues: {
+      email: "",
+      phone: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+    },
+  })
+
+  const onSubmit = (values: RegistrationInput) => {
+    console.log("✅ Registration submitted:", values)
+    // TODO: connect to backend or mutation
+  }
+
   return (
-    <form className="space-y-4">
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium">
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          className="w-full mt-1 border border-gray-300 rounded-md px-3 py-2"
-          required
-        />
-      </div>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        {[
+          { name: "email", label: "Email", type: "email" },
+          { name: "phone", label: "Phone", type: "text" },
+          { name: "password", label: "Password", type: "password" },
+          { name: "firstName", label: "First Name (optional)", type: "text" },
+          { name: "lastName", label: "Last Name (optional)", type: "text" },
+        ].map(({ name, label, type }) => (
+          <FormField
+            key={name}
+            control={form.control}
+            name={name as keyof RegistrationInput}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{label}</FormLabel>
+                <FormControl>
+                  <Input type={type} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        ))}
 
-      <div>
-        <label htmlFor="phone" className="block text-sm font-medium">
-          Phone
-        </label>
-        <input
-          id="phone"
-          name="phone"
-          type="text"
-          className="w-full mt-1 border border-gray-300 rounded-md px-3 py-2"
-          required
-        />
-      </div>
-
-      <div>
-        <label htmlFor="password" className="block text-sm font-medium">
-          Password
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          className="w-full mt-1 border border-gray-300 rounded-md px-3 py-2"
-          required
-        />
-      </div>
-
-      <div>
-        <label htmlFor="firstName" className="block text-sm font-medium">
-          First Name (optional)
-        </label>
-        <input
-          id="firstName"
-          name="firstName"
-          type="text"
-          className="w-full mt-1 border border-gray-300 rounded-md px-3 py-2"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="lastName" className="block text-sm font-medium">
-          Last Name (optional)
-        </label>
-        <input
-          id="lastName"
-          name="lastName"
-          type="text"
-          className="w-full mt-1 border border-gray-300 rounded-md px-3 py-2"
-        />
-      </div>
-
-      <button
-        type="submit"
-        className="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-900 transition-transform duration-200 transform hover:scale-[1.02]"
-      >
-        Join us
-      </button>
-
-    </form>
+        <Button type="submit" className="w-full">
+          Join us
+        </Button>
+      </form>
+    </Form>
   )
 }
