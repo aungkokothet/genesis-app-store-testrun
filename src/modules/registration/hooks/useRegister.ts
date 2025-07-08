@@ -29,11 +29,16 @@ export function useRegister() {
         toast.success(`Welcome ${displayName} 🎉 You're now part of the Builders' Stack`)
       }
 
-      form.reset()
+      form.reset(undefined, {
+       keepErrors: false,
+       keepDirty: false,
+       keepTouched: false, 
+      })
 
-      setTimeout(() => {
-        router.push("/")
-      }, 1500)
+        setTimeout(() => {
+          router.refresh()
+         }, 300)
+     
     },
 
     onError: (err) => {

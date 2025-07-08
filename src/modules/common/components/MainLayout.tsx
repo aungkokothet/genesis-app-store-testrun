@@ -1,5 +1,5 @@
 // src/modules/common/components/MainLayout.tsx
-import { Navbar } from "./Navbar"
+import { Navbar } from "./NavBar"
 import { FooterSection } from "./Footer"
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {

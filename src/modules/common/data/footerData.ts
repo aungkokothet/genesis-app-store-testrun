@@ -1,6 +1,5 @@
 export const quickLinks = [
   { label: "Home", href: "/" },
-  { label: "Register", href: "/register" },
 ]
 
 export const socialLinks = [
