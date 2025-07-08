@@ -1,6 +1,7 @@
 import { BrandBlock } from "./BrandBlock"
 import { QuickLinks } from "./QuickLinks"
 import { SocialLinks } from "./SocialLinks"
+import { CopyrightBlock } from "./CopyrightBlock"
 
 export function FooterSection() {
   return (
@@ -10,7 +11,8 @@ export function FooterSection() {
         <QuickLinks />
         <SocialLinks />
       </div>
+
+      <CopyrightBlock />
     </footer>
   )
 }
-

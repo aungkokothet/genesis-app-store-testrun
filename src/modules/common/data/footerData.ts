@@ -18,3 +18,8 @@ export const brandInfo = {
     { src: "/assets/logo-gvn-nexus.svg", alt: "GVN Nexus" },
   ],
 }
+
+export const siteData = {
+  year: "2025",
+  org: "FTLP",
+}
