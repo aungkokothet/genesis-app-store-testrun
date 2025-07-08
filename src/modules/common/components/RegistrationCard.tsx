@@ -1,7 +1,7 @@
 "use client"
 
-import { useRegister } from "../../modules/registration/hooks/useRegister"
-import { RegistrationForm } from "../../modules/registration/components/RegistrationForm"
+import { useRegister } from "../../registration/hooks/useRegister"
+import { RegistrationForm } from "../../registration/components/RegistrationForm"
 
 export function RegistrationCard() {
   const { form, onSubmit, loading } = useRegister()

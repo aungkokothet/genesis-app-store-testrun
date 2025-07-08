@@ -1,5 +1,5 @@
 import { LandingPage } from "~/modules/landing"
-import { RegistrationCard } from "./components/RegistrationCard"
+import { RegistrationCard } from "../modules/common/components/RegistrationCard"
 
 export default function Home() {
   return (
