@@ -37,7 +37,7 @@ export function useRegister() {
 
         setTimeout(() => {
           router.refresh()
-         }, 300)
+         }, 2000)
      
     },
 
