@@ -7,11 +7,11 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     <div
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat"
       style={{
-        backgroundImage: `url('/assets/background.jpg')`, // same image from LandingPage
+        backgroundImage: `url('/assets/background.jpg')`,
       }}
     >
-      {/* Overlay with white tint and blur */}
-      <div className="bg-white/15 w-full min-h-screen">
+      {/* Uses theme tokens for adaptive styling */}
+      <div className="bg-background/40 text-foreground transition-colors duration-300 w-full min-h-screen">
         <Navbar />
         <main className="pt-20 pb-12">{children}</main>
         <FooterSection />
