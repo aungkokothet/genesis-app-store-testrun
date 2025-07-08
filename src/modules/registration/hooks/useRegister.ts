@@ -19,8 +19,8 @@ export function useRegister() {
       const already = data?.alreadyRegistered
 
       const displayName =
-        variables.firstName?.trim() ||
-        variables.lastName?.trim() ||
+        variables.firstName?.trim() ??
+        variables.lastName?.trim() ??
         "Builder"
 
       if (already) {
