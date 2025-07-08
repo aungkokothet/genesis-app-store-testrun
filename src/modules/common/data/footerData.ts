@@ -11,7 +11,7 @@ export const socialLinks = [
 export const brandInfo = {
   title: "The Builders' Stack",
   description:
-    "15-minute talk show episodes to uncover hidden leverage — your entry point into the studio, infra, and network powering real builder growth. Made possible by 9Figures, FTLP, and GVN Nexus.",
+    "15-minute talk show episodes that uncover hidden leverage in your business. Your entry point into the studio, infra, and network powering real builder growth through apps that actually represent your business. Made possible by 9Figures, FTLP, and GVN Nexus.",
   partners: [
     { src: "/assets/logo-9figures.svg", alt: "9Figures" },
     { src: "/assets/logo-ftlp.svg", alt: "FTLP" },

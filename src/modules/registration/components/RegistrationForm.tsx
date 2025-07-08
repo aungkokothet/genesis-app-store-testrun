@@ -1,10 +1,5 @@
 "use client"
 
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { registrationSchema } from "../data/registrationSchema"
-import type { RegistrationInput } from "../data/registrationSchema"
-
 import {
   Form,
   FormControl,
@@ -15,31 +10,22 @@ import {
 } from "~/components/ui/form"
 import { Input } from "~/components/ui/input"
 import { Button } from "~/components/ui/button"
+import { type UseFormReturn } from "react-hook-form"
+import type { RegistrationInput } from "../data/registrationSchema"
 
-export function RegistrationForm() {
-  const form = useForm<RegistrationInput>({
-    resolver: zodResolver(registrationSchema),
-    defaultValues: {
-      email: "",
-      phone: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-    },
-  })
+type RegistrationFormProps = {
+  form: UseFormReturn<RegistrationInput>
+  onSubmit: () => void
+  loading: boolean
+}
 
-  const onSubmit = (values: RegistrationInput) => {
-    console.log("✅ Registration submitted:", values)
-    // TODO: connect to backend or mutation
-  }
-
+export function RegistrationForm({ form, onSubmit, loading }: RegistrationFormProps) {
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        {[
+      <form onSubmit={onSubmit} className="space-y-4">
+        {[ 
           { name: "email", label: "Email", type: "email" },
           { name: "phone", label: "Phone", type: "text" },
-          { name: "password", label: "Password", type: "password" },
           { name: "firstName", label: "First Name (optional)", type: "text" },
           { name: "lastName", label: "Last Name (optional)", type: "text" },
         ].map(({ name, label, type }) => (
@@ -59,8 +45,8 @@ export function RegistrationForm() {
           />
         ))}
 
-        <Button type="submit" className="w-full">
-          Join us
+        <Button type="submit" className="w-full" disabled={loading}>
+          {loading ? "Joining..." : "Join us"}
         </Button>
       </form>
     </Form>
