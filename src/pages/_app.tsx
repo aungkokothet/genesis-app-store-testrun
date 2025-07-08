@@ -7,6 +7,8 @@ import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 
+import MainLayout from "~/modules/common/components/MainLayout"
+
 const geist = Geist({
   subsets: ["latin"],
 });
@@ -18,7 +20,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <div className={geist.className}>
-        <Component {...pageProps} />
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
       </div>
     </SessionProvider>
   );

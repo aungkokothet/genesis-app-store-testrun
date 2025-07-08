@@ -3,7 +3,7 @@ export function BrandBlock() {
     <div className="space-y-5 flex flex-col items-start">
        <h4 className="text-lg font-semibold mb-3">The Builders' Stack</h4>
         {/* Brand Description */}
-      <p className="text-sm text-gray-600 max-w-xs leading-relaxed">
+      <p className="text-sm text-black-600 max-w-xs leading-relaxed">
        The Builders' Stack is about uncovering the hidden structures, patterns, and processes in your business that you could leverage on for your accelerated growth and building your Apps from there.
       </p>
       {/* Smaller Partner Logos */}
