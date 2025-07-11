@@ -1,48 +1,40 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { api } from "~/utils/api"
 import { registrationSchema, type RegistrationInput } from "../data/registrationSchema"
-import { toast } from "sonner"
 
-export function useRegister() {
-  const router = useRouter()
+type UseRegisterProps = {
+  onSuccess?: (args: { name?: string; alreadyRegistered: boolean }) => void
+  onError?: (message?: string) => void
+}
 
+export function useRegister({ onSuccess, onError }: UseRegisterProps = {}) {
   const form = useForm<RegistrationInput>({
     resolver: zodResolver(registrationSchema),
   })
 
   const registerMutation = api.auth.registerUser.useMutation({
     onSuccess: (data, variables) => {
-      const already = data?.alreadyRegistered
-
       const displayName =
         variables.firstName?.trim() ??
         variables.lastName?.trim() ??
         "Builder"
 
-      if (already) {
-        toast.success(`Hey ${displayName}, you're already recognized as a Builder`)
-      } else {
-        toast.success(`Welcome ${displayName} 🎉 You're now part of the Builders' Stack`)
-      }
+      const alreadyRegistered = !!data?.alreadyRegistered
+
+      onSuccess?.({ name: displayName, alreadyRegistered })
 
       form.reset(undefined, {
-       keepErrors: false,
-       keepDirty: false,
-       keepTouched: false, 
+        keepErrors: false,
+        keepDirty: false,
+        keepTouched: false,
       })
-
-        setTimeout(() => {
-          router.refresh()
-         }, 2000)
-     
     },
 
     onError: (err) => {
-      toast.error(err.message || "Registration failed")
+      onError?.(err.message || "Registration failed")
     },
   })
 
